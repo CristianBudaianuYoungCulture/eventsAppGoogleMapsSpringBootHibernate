@@ -1,0 +1,139 @@
+
+[
+ {
+  "id":"IASI",
+  "name":"IASI",
+  "parent_id":"0"
+ }, 
+ {
+  "id":"SUCEAVA",
+  "name":"SUCEAVA",
+  "parent_id":"0"
+ }, 
+ {
+  "id":"PIATRA NEAMT",
+  "name":"PIATRA NEAMT",
+  "parent_id":"0"
+ }, 
+ {
+  "id":"Iasi",
+  "name":"Iasi",
+  "parent_id":"IASI"
+ }, 
+ {
+  "id":"Pascani",
+  "name":"Pascani",
+  "parent_id":"IASI"
+ }, 
+ {
+  "id":"6",
+  "name":"Harlau",
+  "parent_id":"IASI"
+ }, 
+ {
+  "id":"7",
+  "name":"Suceava",
+  "parent_id":"SUCEAVA"
+ }, 
+ {
+  "id":"8",
+  "name":"Gura Humorului",
+  "parent_id":"SUCEAVA"
+ }, 
+ {
+  "id":"9",
+  "name":"Piatra Neamt",
+  "parent_id":"PIATRA NEAMT"
+ }, 
+ {
+  "id":"10",
+  "name":"Roman",
+  "parent_id":"PIATRA NEAMT"
+ }, 
+ {
+  "id":"11",
+  "name":"New York city",
+  "parent_id":"4"
+ }, 
+ {
+  "id":"12",
+  "name":"Buffalo",
+  "parent_id":"4"
+ }, 
+ {
+  "id":"13",
+  "name":"Albany",
+  "parent_id":"4"
+ }, 
+ {
+  "id":"Gastesti",
+  "name":"Gastesti",
+  "parent_id":"Pascani"
+ }, 
+ {
+  "id":"Brosteni",
+  "name":"Brosteni",
+  "parent_id":"Pascani"
+ }, 
+ {
+  "id":"Blagesti",
+  "name":"Blagesti",
+  "parent_id":"Pascani"
+ }, 
+ {
+  "id":"17",
+  "name":"Los Angeles",
+  "parent_id":"6"
+ }, 
+ {
+  "id":"18",
+  "name":"San Francisco",
+  "parent_id":"6"
+ }, 
+ {
+  "id":"19",
+  "name":"San Diego",
+  "parent_id":"6"
+ }, 
+ {
+  "id":"20",
+  "name":"Toronto",
+  "parent_id":"7"
+ }, 
+ {
+  "id":"21",
+  "name":"Ottawa",
+  "parent_id":"7"
+ }, 
+ {
+  "id":"22",
+  "name":"Vancouver",
+  "parent_id":"8"
+ }, 
+ {
+  "id":"23",
+  "name":"Victoria",
+  "parent_id":"8"
+ }, 
+ {
+  "id":"24",
+  "name":"Sydney",
+  "parent_id":"9"
+ }, 
+ {
+  "id":"25",
+  "name":"Newcastle",
+  "parent_id":"9"
+ }, 
+ {
+  "id":"26",
+  "name":"City of Brisbane",
+  "parent_id":"10"
+ }, 
+ {
+  "id":"27",
+  "name":"Gold Coast",
+  "parent_id":"10"
+ }
+]
+

@@ -1,80 +1,87 @@
 package com.events.eventsapp.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
 @Entity
-@Table(name = "user_message")
 public class MessageModel implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "message_id", nullable = false, unique = true)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "message_id", nullable = false, unique = true)
+	private Long id;
 
-    @Column(name = "text", nullable = false)
-    private String text;
+	@Column(name = "text", nullable = false)
+	private String text;
 
-    @Column(name = "send_date", nullable =  false)
-    private Timestamp sendDate;
+	@Column(name = "send_date", nullable = false)
+	private Timestamp sendDate;
 
-    @ManyToOne
-    @JoinColumn(name = "sender_id", nullable = false)
-    private UserModel sender;
+	@ManyToOne
+	@JoinColumn(name = "sender_id", nullable = false)
+	private UserModel sender;
 
-    @ManyToOne
-    @JoinColumn(name = "recipient_id", nullable = false)
-    private UserModel recipient;
+	@ManyToOne
+	@JoinColumn(name = "recipient_id", nullable = false)
+	private UserModel recipient;
 
-    @Transient
-    private Boolean isOwner;
+	@Transient
+	private Boolean isOwner;
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public Timestamp getSendDate() {
-        return sendDate;
-    }
+	public Timestamp getSendDate() {
+		return sendDate;
+	}
 
-    public void setSendDate(Timestamp sendDate) {
-        this.sendDate = sendDate;
-    }
+	public void setSendDate(Timestamp sendDate) {
+		this.sendDate = sendDate;
+	}
 
-    public UserModel getSender() {
-        return sender;
-    }
+	public UserModel getSender() {
+		return sender;
+	}
 
-    public void setSender(UserModel sender) {
-        this.sender = sender;
-    }
+	public void setSender(UserModel sender) {
+		this.sender = sender;
+	}
 
-    public UserModel getRecipient() {
-        return recipient;
-    }
+	public UserModel getRecipient() {
+		return recipient;
+	}
 
-    public void setRecipient(UserModel recipient) {
-        this.recipient = recipient;
-    }
+	public void setRecipient(UserModel recipient) {
+		this.recipient = recipient;
+	}
 
-    public Boolean getOwner() {
-        return isOwner;
-    }
+	public Boolean getOwner() {
+		return isOwner;
+	}
 
-    public void setOwner(Boolean owner) {
-        isOwner = owner;
-    }
+	public void setOwner(Boolean owner) {
+		isOwner = owner;
+	}
 }

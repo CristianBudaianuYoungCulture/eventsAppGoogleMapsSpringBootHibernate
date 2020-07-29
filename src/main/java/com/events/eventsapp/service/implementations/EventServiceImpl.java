@@ -1,149 +1,152 @@
 package com.events.eventsapp.service.implementations;
 
-import com.events.eventsapp.model.EventModel;
-import com.events.eventsapp.repositories.IEventRepository;
-import com.events.eventsapp.service.interfaces.IEventService;
-import com.events.eventsapp.service.interfaces.IEventCategoryService;
+import java.sql.Timestamp;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
-
-import java.util.*;
+import com.events.eventsapp.model.EventModel;
+import com.events.eventsapp.repositories.IEventRepository;
+import com.events.eventsapp.service.interfaces.IEventCategoryService;
+import com.events.eventsapp.service.interfaces.IEventService;
 
 @Service("eventService")
 public class EventServiceImpl implements IEventService {
 
-    @Qualifier("eventRepository")
-    @Autowired
-    private IEventRepository iEventRepository;
+	@Qualifier("eventRepository")
+	@Autowired
+	private IEventRepository iEventRepository;
 
-    @Autowired
-    private IEventCategoryService IEventCategoryService;
+	@Autowired
+	private IEventCategoryService IEventCategoryService;
 
-    @Override
-    public EventModel findEventByName(String eventName) {
+	@Override
+	public EventModel findEventByName(String eventName) {
 
-        return iEventRepository.findByName(eventName);
+		return iEventRepository.findByName(eventName);
 
-    }
+	}
 
-    @Override
-    public Optional <EventModel> findEventById(Long Id) {
+	@Override
+	public Optional<EventModel> findEventById(Long Id) {
 
-        return iEventRepository.findById(Id);
+		return iEventRepository.findById(Id);
 
-    }
+	}
 
-    @Override
-    public void saveEvent(EventModel event) {
+	@Override
+	public void saveEvent(EventModel event) {
 
-        iEventRepository.save(event);
+		iEventRepository.save(event);
 
-    }
+	}
 
-    //TODO add checking if user deletes it's own event not other users.
-    @Override
-    @Transactional
-    public void deleteEventById(Long eventId) {
+	// TODO add checking if user deletes it's own event not other users.
+	@Override
+	@Transactional
+	public void deleteEventById(Long eventId) {
 
-            iEventRepository.deleteEventModelById(eventId);
+		iEventRepository.deleteEventModelById(eventId);
 
-    }
+	}
 
-    @Override
-    public List<EventModel> getActualEvents() {
+	@Override
+	public List<EventModel> getActualEvents() {
 
-        List<EventModel> eventModelList = iEventRepository.getEvents();
-        List<EventModel> actualEventModelList = new LinkedList<EventModel>();
+		List<EventModel> eventModelList = iEventRepository.getEvents();
+		List<EventModel> actualEventModelList = new LinkedList<EventModel>();
 
-        for(EventModel e : eventModelList) {
-            if(new Timestamp(System.currentTimeMillis()).compareTo(e.getBeginningDate()) <= 0) {
+		for (EventModel e : eventModelList) {
+			if (new Timestamp(System.currentTimeMillis()).compareTo(e.getBeginningDate()) <= 0) {
 
-                actualEventModelList.add(e);
+				actualEventModelList.add(e);
 
-            }
-        }
+			}
+		}
 
-        return actualEventModelList;
-    }
+		return actualEventModelList;
+	}
 
-    @Override
-    public List<EventModel> getActualEventsAndSort(String sortMode) {
+	@Override
+	public List<EventModel> getActualEventsAndSort(String sortMode) {
 
-        List<EventModel> eventModelList = new LinkedList<EventModel>();
+		List<EventModel> eventModelList = new LinkedList<EventModel>();
 
-        if(sortMode.equals("nameAsc")) {
-            eventModelList = iEventRepository.getEventsOrderByNameAsc();
-        } else if(sortMode.equals("nameDesc")) {
-            eventModelList = iEventRepository.getEventsOrderByNameDesc();
-        } else if(sortMode.equals("timeAsc")) {
-            eventModelList = iEventRepository.getEventsOrderByBeginningDateAsc();
-        } else if(sortMode.equals("timeDesc")) {
-            eventModelList = iEventRepository.getEventsOrderByBeginningDateDesc();
-        }
+		if (sortMode.equals("nameAsc")) {
+			eventModelList = iEventRepository.getEventsOrderByNameAsc();
+		} else if (sortMode.equals("nameDesc")) {
+			eventModelList = iEventRepository.getEventsOrderByNameDesc();
+		} else if (sortMode.equals("timeAsc")) {
+			eventModelList = iEventRepository.getEventsOrderByBeginningDateAsc();
+		} else if (sortMode.equals("timeDesc")) {
+			eventModelList = iEventRepository.getEventsOrderByBeginningDateDesc();
+		}
 
+		List<EventModel> actualEventModelList = new LinkedList<EventModel>();
 
-        List<EventModel> actualEventModelList = new LinkedList<EventModel>();
+		for (EventModel e : eventModelList) {
+			// if(new Timestamp(System.currentTimeMillis()).compareTo(e.getBeginningDate())
+			// <= 0) {
 
-        for(EventModel e : eventModelList) {
-            if(new Timestamp(System.currentTimeMillis()).compareTo(e.getBeginningDate()) <= 0) {
+			actualEventModelList.add(e);
 
-                actualEventModelList.add(e);
+			// }
+		}
 
-            }
-        }
+		return actualEventModelList;
+	}
 
-        return actualEventModelList;
-    }
+	@Override
+	public List<EventModel> getActualEventsByName(String name) {
 
-    @Override
-    public List<EventModel> getActualEventsByName(String name) {
+		List<EventModel> eventModelList = iEventRepository.getEventsbyName(name);
+		List<EventModel> actualEventModelList = new LinkedList<EventModel>();
 
-        List<EventModel> eventModelList = iEventRepository.getEventsbyName(name);
-        List<EventModel> actualEventModelList = new LinkedList<EventModel>();
+		for (EventModel e : eventModelList) {
+			// if (new Timestamp(System.currentTimeMillis()).compareTo(e.getBeginningDate())
+			// <= 0) {
 
-        for(EventModel e : eventModelList) {
-            if(new Timestamp(System.currentTimeMillis()).compareTo(e.getBeginningDate()) <= 0) {
+			actualEventModelList.add(e);
 
-                actualEventModelList.add(e);
+			// }
+		}
 
-            }
-        }
+		return actualEventModelList;
+	}
 
-        return actualEventModelList;
-    }
+	@Override
+	public List<EventModel> getActualEventsByNameAndSort(String eventName, String sortMode) {
 
-    @Override
-    public List<EventModel> getActualEventsByNameAndSort(String eventName, String sortMode) {
+		List<EventModel> eventModelList = new LinkedList<>();
 
-        List<EventModel> eventModelList = new LinkedList<>();
+		if (sortMode.equals("nameAsc")) {
+			eventModelList = iEventRepository.getEventsByNameOrderByNameAsc(eventName);
+		} else if (sortMode.equals("nameDesc")) {
+			eventModelList = iEventRepository.getEventsByNameOrderByNameDesc(eventName);
+		} else if (sortMode.equals("timeAsc")) {
+			eventModelList = iEventRepository.getEventsByNameOrderByBeginningDateAsc(eventName);
+		} else if (sortMode.equals("timeDesc")) {
+			eventModelList = iEventRepository.getEventsByNameOrderByBeginningDateDesc(eventName);
+		}
 
-        if(sortMode.equals("nameAsc")) {
-            eventModelList = iEventRepository.getEventsByNameOrderByNameAsc(eventName);
-        } else if(sortMode.equals("nameDesc")) {
-            eventModelList = iEventRepository.getEventsByNameOrderByNameDesc(eventName);
-        } else if(sortMode.equals("timeAsc")) {
-            eventModelList = iEventRepository.getEventsByNameOrderByBeginningDateAsc(eventName);
-        } else if(sortMode.equals("timeDesc")) {
-            eventModelList = iEventRepository.getEventsByNameOrderByBeginningDateDesc(eventName);
-        }
+		List<EventModel> actualEventModelList = new LinkedList<EventModel>();
 
-        List<EventModel> actualEventModelList = new LinkedList<EventModel>();
+		for (EventModel e : eventModelList) {
+			// if (new Timestamp(System.currentTimeMillis()).compareTo(e.getBeginningDate())
+			// <= 0) {
 
-        for(EventModel e : eventModelList) {
-            if(new Timestamp(System.currentTimeMillis()).compareTo(e.getBeginningDate()) <= 0) {
+			actualEventModelList.add(e);
 
-                actualEventModelList.add(e);
+			// }
+		}
 
-            }
-        }
+		return actualEventModelList;
 
-        return actualEventModelList;
-
-    }
+	}
 
 }
