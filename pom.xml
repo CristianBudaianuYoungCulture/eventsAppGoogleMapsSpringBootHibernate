@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.events</groupId>
+	<artifactId>eventsapp</artifactId>
+	<version>1.0.0</version>
+	<packaging>war</packaging>
+
+	<name>eventsapp</name>
+	<description>A small, web application allowing users to organize events with Google Maps.</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.1.5.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>openshift</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>${maven-war-plugin.version}</version>
+						<configuration>
+							<outputDirectory>deployments</outputDirectory>
+							<warName>EVENTS_APP_ROOT</warName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<SPRING_DATASOURCE_URL>jdbc:mysql://localhost:3306/events_database?serverTimezone=Europe/Warsaw&amp;verifyServerCertificate=false&amp;useSSL=true</SPRING_DATASOURCE_URL>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<build>
+			</build>
+			<properties>
+				<SPRING_DATASOURCE_URL>jdbc:mysql://localhost:3306/events_database?serverTimezone=Europe/Warsaw&amp;verifyServerCertificate=false&amp;useSSL=true</SPRING_DATASOURCE_URL>
+				<SPRING_DATASOURCE_USERNAME>webappspringuser</SPRING_DATASOURCE_USERNAME>
+				<SPRING_DATASOURCE_PASSWORD>f7=en5^7-uCG?yHt</SPRING_DATASOURCE_PASSWORD>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<build>
+			</build>
+			<properties>
+				<SPRING_DATASOURCE_URL>jdbc:mysql://localhost:3306/events_database?serverTimezone=Europe/Warsaw&amp;verifyServerCertificate=false&amp;useSSL=true</SPRING_DATASOURCE_URL>
+				<SPRING_DATASOURCE_USERNAME>webappspringuser</SPRING_DATASOURCE_USERNAME>
+				<SPRING_DATASOURCE_PASSWORD>f7=en5^7-uCG?yHt</SPRING_DATASOURCE_PASSWORD>
+				<SPRING_DATASOURCE_JNDI_NAME>wartosctestowa123</SPRING_DATASOURCE_JNDI_NAME>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>
